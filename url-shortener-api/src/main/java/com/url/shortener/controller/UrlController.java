@@ -18,7 +18,7 @@ public class UrlController {
 	@Autowired
 	UrlService urlService;
 
-	@PostMapping
+	@PostMapping("/encode")
 	public Map<String, String> encode(@RequestBody String url) {
 		Map<String, String> _mapEncode = new HashMap<String, String>();
 		_mapEncode.put("Input-URL", url);
@@ -26,7 +26,7 @@ public class UrlController {
 		return _mapEncode;
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/decode/{id}")
 	public Map<String, String> decode(@PathVariable String id) {
 		Map<String, String> _mapDecode = new HashMap<String, String>();
 		_mapDecode.put("Input Short-URL/ID", id);
