@@ -17,12 +17,12 @@ public class UrlController {
 
 	@PostMapping
 	public String encode(@RequestBody String url) {
-		return null;
+		return urlService.encodeUrl(url);
 	}
 	
 	@GetMapping("/{id}")
 	public String decode(@PathVariable String id) {
-		return null;
+		return urlService.decodeUrl(id);
 	}
 
 }

@@ -4,6 +4,6 @@ public interface UrlService {
 	
 	public String encodeUrl(String url);
 	
-	public String decodeUrl(String url);
+	public String decodeUrl(String id);
 	
 }
