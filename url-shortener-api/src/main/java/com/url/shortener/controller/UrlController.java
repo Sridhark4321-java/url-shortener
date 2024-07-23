@@ -1,5 +1,8 @@
 package com.url.shortener.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +19,19 @@ public class UrlController {
 	UrlService urlService;
 
 	@PostMapping
-	public String encode(@RequestBody String url) {
-		return urlService.encodeUrl(url);
+	public Map<String, String> encode(@RequestBody String url) {
+		Map<String, String> _mapEncode = new HashMap<String, String>();
+		_mapEncode.put("Input-URL", url);
+		_mapEncode.put("Shortened-URL", urlService.encodeUrl(url));		
+		return _mapEncode;
 	}
 	
 	@GetMapping("/{id}")
-	public String decode(@PathVariable String id) {
-		return urlService.decodeUrl(id);
+	public Map<String, String> decode(@PathVariable String id) {
+		Map<String, String> _mapDecode = new HashMap<String, String>();
+		_mapDecode.put("Input Short-URL/ID", id);
+		_mapDecode.put("Complete-URL", urlService.decodeUrl(id));
+		return _mapDecode;
 	}
 
 }
