@@ -17,7 +17,7 @@ public class UrlServiceImpl implements UrlService {
 	public String encodeUrl(String url) {
 		// Throw exception when URL not submitted 
 		if(url == null)
-			throw new RuntimeException("Submit valid URL.");	
+			throw new RuntimeException("Invalid URL");	
 		
 		// Generate HashCode
 		String id = Hashing.murmur3_32_fixed().hashString(url, StandardCharsets.UTF_8).toString();
@@ -31,7 +31,6 @@ public class UrlServiceImpl implements UrlService {
 	public String decodeUrl(String id) {
 		//Read the original/decoded url from cache and return when match found
 		String origUrl = _mapShortUrlsCache.get(id);
-	
 		return origUrl;
 	}
 
