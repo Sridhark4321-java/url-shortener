@@ -9,13 +9,18 @@ OpenApi 2.0.2
 
 URLS :
 
-This endpoint will return shortened url from long url string
+This endpoint will return shortened url from long url string.
+
 Endpoint : http://localhost:8080/encode
 Method Type : POST 
 Input String with body ( long url string )
 Results in JSON format
 
-This endpoint will return the long url from short id/url
+
+
+
+This endpoint will return the long url from short id/url.
+
 Endpoint : http://localhost:8080/decode/{id}
 Method Type : GET 
 Input short/Id in the url (short url/id)
