@@ -31,11 +31,7 @@ public class UrlServiceImpl implements UrlService {
 	public String decodeUrl(String id) {
 		//Read the original/decoded url from cache and return when match found
 		String origUrl = _mapShortUrlsCache.get(id);
-		
-		//entry not found in the cache then return failure message
-		if(origUrl == null)
-			return "URL match not found";
-		
+	
 		return origUrl;
 	}
 
