@@ -1,6 +1,6 @@
 # url-shortener
 
-This project shows URL shortneing using 
+This project shows URL shortening using 
 Spring Boot 3.3 
 Spring Web 
 Guava 33.2.1
@@ -19,11 +19,11 @@ Results in JSON format
 
 
 
-This endpoint will return the long url from short id/url.
+This endpoint will return the long url from short url.
 
-Endpoint : http://localhost:8080/decode/{id}
-Method Type : GET 
-Input short/Id in the url (short url/id)
+Endpoint : http://localhost:8080/decode
+Method Type : POST
+Input short url in the body (short url)
 Results in JSON format
 
 Swagger/OpenApi : http://localhost:8080/swagger-ui.html 
