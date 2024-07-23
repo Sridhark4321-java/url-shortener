@@ -1,7 +1,6 @@
 package com.url.shortener;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.url.shortener.controller.UrlController;
 import com.url.shortener.service.UrlService;
 
 @SpringBootTest
@@ -22,32 +22,44 @@ class UrlShortenerApiApplicationTests {
 	@Autowired
 	UrlService urlService;
 	
+	@Autowired
+	UrlController urlController;
+	
+	
 	@Test
 	public void testEncode() {
 		String inputUrl = "www.google.com";		
-		 when(mockUrlService.encodeUrl(inputUrl)).thenReturn("08316aaa");		 
-		 assertEquals("08316aaa", "08316aaa");
+		String expectedValue = "http://short.est/08316aaa";
+		String actualValue = "http://short.est/08316aaa";
+		 when(mockUrlService.encodeUrl(inputUrl)).thenReturn("http://short.est/08316aaa");		 
+		 assertEquals(expectedValue, actualValue);
 	}
 	
 	@Test
 	public void testDecode() {
-		String  id  = "08316aaa";		
-		 when(mockUrlService.decodeUrl(id)).thenReturn("www.google.com");		 
-		 assertEquals("www.google.com", "www.google.com");
+		String  shortUrl  = "http://short.est/08316aaa";	
+		String expectedValue = "www.google.com";
+		String actualValue = "www.google.com";
+		 when(mockUrlService.decodeUrl(shortUrl)).thenReturn("www.google.com");		 
+		 assertEquals(expectedValue, actualValue);
 	}
 	
 	@Test
 	public void testEncodeNegative() {
-		String inputUrl = "www.gmail.com";		
-		 when(mockUrlService.encodeUrl(inputUrl)).thenReturn("08316aaa");		 
-		 assertNotEquals("65623a15", "08316aaa");
+		String inputUrl = "www.gmail.com";	
+		String actualValue = "http://short.est/65623a15";
+		String unExpectedValue = "http://short.est/08316aaa";
+		 when(mockUrlService.encodeUrl(inputUrl)).thenReturn("http://short.est/65623a15");		 
+		 assertNotEquals(unExpectedValue, actualValue);
 	}
 	
 	@Test
 	public void testDecodeNegative() {
-		String  id  = "65623a15";		
-		when(mockUrlService.decodeUrl(id)).thenReturn("www.google.com");		 
-		assertNotEquals("www.gmail.com", "www.google.com");
+		String  shortUrl  = "http://short.est/65623a15";		
+		String actualValue = "www.gmail.com";
+		String unExpectedValue = "www.google.com";
+		when(mockUrlService.decodeUrl(shortUrl)).thenReturn("www.gmail.com");		 
+		assertNotEquals(unExpectedValue, actualValue);
 	}
 	
 	@Test

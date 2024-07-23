@@ -15,6 +15,8 @@ public class UrlServiceImpl implements UrlService {
 
 	@Override
 	public String encodeUrl(String url) {
+		String encodedUrl = null;
+		StringBuilder sb = new StringBuilder("http://short.est/");
 		// Throw exception when URL not submitted 
 		if(url == null)
 			throw new RuntimeException("Invalid URL");	
@@ -22,15 +24,16 @@ public class UrlServiceImpl implements UrlService {
 		// Generate HashCode
 		String id = Hashing.murmur3_32_fixed().hashString(url, StandardCharsets.UTF_8).toString();
 		
+		encodedUrl = sb.append(id).toString();
 		// Storing short url as key and original url as value.
-		_mapShortUrlsCache.put(id,url);
-		return id;
+		_mapShortUrlsCache.put(encodedUrl.toString(),url);
+		return encodedUrl;
 	}
 
 	@Override
-	public String decodeUrl(String id) {
+	public String decodeUrl(String shortUrl) {
 		//Read the original/decoded url from cache and return when match found
-		String origUrl = _mapShortUrlsCache.get(id);
+		String origUrl = _mapShortUrlsCache.get(shortUrl);
 		return origUrl;
 	}
 

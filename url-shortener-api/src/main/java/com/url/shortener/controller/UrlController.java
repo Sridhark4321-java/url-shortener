@@ -6,8 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,12 +27,12 @@ public class UrlController {
 		return new ResponseEntity<>(_mapEncode,HttpStatus.OK);
 	}
 	
-	@GetMapping("/decode/{id}")
-	public ResponseEntity<Object> decode(@PathVariable String id) {
-		if(urlService.decodeUrl(id) == null) throw new UrlNotFoundException();
+	@PostMapping("/decode")
+	public ResponseEntity<Object> decode(@RequestBody String shortUrl) {
+		if(urlService.decodeUrl(shortUrl) == null) throw new UrlNotFoundException();
 		Map<String, String> _mapDecode = new HashMap<String, String>();
-		_mapDecode.put("Input Short-URL/ID", id);
-		_mapDecode.put("Complete-URL", urlService.decodeUrl(id));
+		_mapDecode.put("Input Short-URL", shortUrl);
+		_mapDecode.put("Complete-URL", urlService.decodeUrl(shortUrl));
 		return new ResponseEntity<>(_mapDecode,HttpStatus.OK);
 	}
 
